@@ -16,6 +16,7 @@ ini_set("display_errors", 1);
 register_activation_hook( __FILE__, array ('Mog_Plugin', 'mog_install' ));
 
 add_action( 'admin_menu', array ('Mog_Plugin','mog_register_menu'));
+add_action("wp_head", array ('Mog_Plugin','mog_add_tags'));
 
 class Mog_Plugin  {
 
@@ -38,6 +39,13 @@ class Mog_Plugin  {
 		if (file_exists($file)) {
 			require $file;
 		}
+  }
+
+  static public function mog_add_tags() {
+    $post_id = get_the_ID();
+    $meta_key = 'teste';
+
+    add_post_meta( $post_id, $meta_key, 'teste', true );
   }
 
   /*
